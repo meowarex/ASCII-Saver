@@ -34,7 +34,7 @@ Arch: `sudo pacman -S alacritty swayidle playerctl`
 ```bash
 git clone https://github.com/meowarex/ascii-saver
 cd ASCII-Saver
-pip install --user -r requirements.txt
+pip install -r requirements.txt --break-system-packages
 ```
 
 ### 3. Add Custom Content
@@ -43,7 +43,7 @@ Edit `content.txt` with your own ASCII art: [ASCII Generator](https://patorjk.co
 
 If no `content.txt` exists Somehow.. the screensaver uses a default placeholder.
 
-### 4. Update Paths & Timeouts in `launch.sh` & `autostart.sh`
+### 4. Update Paths, Timeouts and Font Size in `launch.sh` & `autostart.sh`
 
 **Launch.sh**
 ```Bash
@@ -53,8 +53,9 @@ If no `content.txt` exists Somehow.. the screensaver uses a default placeholder.
 alacritty --class SSS \
   -o 'window.startup_mode="Fullscreen"' \
   -o 'font.size=15' \
-  -e bash -c "cd /path/to/ASCII-Saver && source .venv/bin/activate && python3 main.py" &
-         # Here! ^^^^^^^^^
+        # Here! ^^
+  -e bash -c "cd /path/to/ascii-saver && python3 main.py" &
+         # Here! ^^^^^^^^   
 
 # Save alacritty PID
 echo $! > /tmp/sss.pid
