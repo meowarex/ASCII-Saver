@@ -1,4 +1,4 @@
-# OMARCHY Screensaver - KDE Plasma Port
+# ASCII Saver | OMARCHY Screensaver Port
 
 A faithful port of the **OMARCHY OS screensaver** for **KDE Plasma** and other Linux distributions.
 
@@ -13,29 +13,28 @@ A faithful port of the **OMARCHY OS screensaver** for **KDE Plasma** and other L
 This project just provides an easy setup for KDE and other Desktop Environments to use the `terminaltexteffects` library to create the screensaver.
 
 ---
-## Requirements
+## Batteries
 
 **Python 3.7 & Pip/Pipx** - Language and Package Manager
-**Linux** - The OS (Works on windows but only in the terminal window)
+**Linux** - The OS (Works on windows but only in the terminal window & no playback check)
 **Alacritty** - Terminal (works in others if modified `launch.sh`)
 **swayidle** - Package for Screen Saver on Idle
+**playerctl** - Media player control (prevents screensaver during playback)
 
 ## Setup
 
 ### 1. Install Dependencies
 
-Install `Alacritty` & `swayidle` from the AUR or the Extra Repo
+Install `Alacritty`, `swayidle`, and `playerctl` from the AUR or the Extra Repo
 
-Arch: `sudo pacman -S alacritty swayidle`
+Arch: `sudo pacman -S alacritty swayidle playerctl`
 
 ### 2. Install Project
 
 ```bash
 git clone https://github.com/meowarex/ascii-saver
 cd ASCII-Saver
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+pip install --user -r requirements.txt
 ```
 
 ### 3. Add Custom Content
@@ -64,8 +63,8 @@ echo $! > /tmp/sss.pid
 **autostart.sh**
 ```Bash
 swayidle -w \
-    timeout 60 '/path/to/launch.sh' \
-     # Here ^^  ^^^^^^^^
+    timeout 300 'if ! bash /path/to/ascii-saver/media_check.sh; then bash /path/to/ascii-saver/launch.sh; fi' \
+     # Here ^^^            ^^^^^^^^                                       ^^^^^^^^
     resume 'kill $(cat /tmp/sss.pid 2>/dev/null); rm -f /tmp/sss.pid'
 ```
 ---
@@ -74,7 +73,6 @@ swayidle -w \
 
 ### Quick Test
 ```bash
-source .venv/bin/activate
 python3 main.py
 ```
 
@@ -89,7 +87,7 @@ Since KDE Plasma (as of 6.5) Still doesnt have support for custom Screen Savers,
 1. Open **System Settings** → **Autostart** → **Add New**
 2. Click **Login Script**
 3. Select the `launch.sh` script:
-4. Something...
+4. And it should automagically work on next Boot <3
 
 The `launch.sh` script handles fullscreen terminal launch and cleanup.
 
