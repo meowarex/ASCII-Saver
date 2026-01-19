@@ -87,10 +87,10 @@ Since KDE Plasma (as of 6.5) Still doesnt have support for custom Screen Savers,
 
 1. Open **System Settings** → **Autostart** → **Add New**
 2. Click **Login Script**
-3. Select the `launch.sh` script:
+3. Select the `autostart.sh` script:
 4. And it should automagically work on next Boot <3
 
-The `launch.sh` script handles fullscreen terminal launch and cleanup.
+The `autostart.sh` script handles fullscreen terminal launch and cleanup.
 
 ---
 
@@ -98,7 +98,7 @@ The `launch.sh` script handles fullscreen terminal launch and cleanup.
 
 This port is optimized for **KDE Plasma**. For other desktop environments (GNOME, Cinnamon, XFCE, etc.), you will need to:
 
-- Modify `launch.sh` for your DE's terminal requirements
+- Modify `launch.sh & autostart.sh` for your DE's terminal requirements
 
 The core Python application will work on any Linux distribution, but system integration requires DE-specific configuration.
 
